@@ -63,4 +63,5 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-yarn.lock
+# Custom
+*.lock
