@@ -1,1 +1,3 @@
-declare const global: {}
+declare const global: {
+  HermesInternal: null | {}
+}
