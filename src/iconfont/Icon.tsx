@@ -868,7 +868,7 @@ export const Icon: FunctionComponent<Props> = ({ color, name, size, ...rest }) =
 };
 
 Icon.defaultProps = {
-  size: 18,
+  size: 20,
 };
 
 const getIconColor = (color: string | string[] | undefined, index: number, defaultColor: string) => {
