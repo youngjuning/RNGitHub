@@ -3,18 +3,16 @@ import { NavigationNativeContainer } from '@react-navigation/native'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from '../iconfont/Icon'
-import WelcomeScreen from '../screens/WelcomeScreen'
-import FlexBoxScreen from '../screens/FlexBoxScreen'
+import LargeListScreen from '../screens/LargeListScreen'
 
 export type RootStackParamList = {
-  WelcomeScreen: undefined
-  FlexBoxScreen: undefined
+  LargeListScreen: undefined
 }
 
 const RootStack = createStackNavigator<RootStackParamList>()
 const RootStackScreen = () => (
   <RootStack.Navigator
-    initialRouteName="FlexBoxScreen"
+    initialRouteName="LargeListScreen"
     screenOptions={{
       headerStyle: {
         backgroundColor: '#ffffff',
@@ -31,8 +29,7 @@ const RootStackScreen = () => (
       ...TransitionPresets.SlideFromRightIOS,
     }}
   >
-    <RootStack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{ headerShown: false }} />
-    <RootStack.Screen name="FlexBoxScreen" component={FlexBoxScreen} />
+    <RootStack.Screen name="LargeListScreen" component={LargeListScreen} />
   </RootStack.Navigator>
 )
 const BottomTab = createBottomTabNavigator()
