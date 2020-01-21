@@ -10,7 +10,7 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "pod": "cd ios && pod install",
-    "icon":"npx iconfont-rn",
+    "icon": "npx iconfont-rn",
     "gradle:clean": "cd android && ./gradlew clean",
     "an:release": "yarn gradle:clean && cd android && ./gradlew app:assembleRelease",
     "an:installRelease": "yarn gradle:clean && cd android && ./gradlew app:installRelease",
