@@ -46,7 +46,12 @@ const PopularStackScreen = () => (
 const BottomTab = createBottomTabNavigator()
 
 const BottomTabNavigator = () => (
-  <BottomTab.Navigator>
+  <BottomTab.Navigator
+    tabBarOptions={{
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
+    }}
+  >
     <BottomTab.Screen
       name="Home"
       component={HomeStackScreen}
