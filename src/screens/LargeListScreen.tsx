@@ -5,9 +5,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { observer } from 'mobx-react'
 import { LargeList } from 'react-native-largelist-v3'
 import { ChineseNormalHeader, ChineseWithLastDateFooter } from 'react-native-spring-scrollview/Customize'
-import { RootStackParamList } from '../routes/AppContainer'
 import ListStore from '../stores/ListStore'
-import Icon from '../iconfont/Icon'
+import { RootStackParamList } from '../routes/StackParamList'
 
 type LargeListScreenNavigationProp = StackNavigationProp<RootStackParamList, 'LargeListScreen'>
 type LargeListScreenRouteProp = RouteProp<RootStackParamList, 'LargeListScreen'>
