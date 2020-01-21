@@ -1,9 +1,10 @@
 ## 第三方组件
 
-- react-navigation@5
-- mobx@5
-- mobx-react@6
-- axios@0.19.1
+- react-navigation 5
+- mobx
+- mobx-react
+- axios
+- react-native-tab-view
 - react-native-code-push
 - react-native-splash-screen
 

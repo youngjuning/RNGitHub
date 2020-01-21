@@ -39,7 +39,13 @@ const PopularStackScreen = () => (
     // @ts-ignore
     screenOptions={{ ...getScreenOptions() }}
   >
-    <Stack.Screen name="PopularScreen" component={PopularScreen} />
+    <Stack.Screen
+      name="PopularScreen"
+      component={PopularScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
   </Stack.Navigator>
 )
 
@@ -51,9 +57,10 @@ const BottomTabNavigator = () => (
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray',
     }}
+    initialRouteName="HomeStackScreen"
   >
     <BottomTab.Screen
-      name="Home"
+      name="HomeStackScreen"
       component={HomeStackScreen}
       options={{
         tabBarLabel: '最热',
