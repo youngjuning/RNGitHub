@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import getScreenOptions from './utils/getScreenOptions'
 import TrendingScreen from '../screens/TrendingScreen'
 import FavoriteScreen from '../screens/FavoriteScreen'
-import PopularScreen from '../screens/PopularScreen'
+import PopularScreen from '../screens/PopularScreen/PopularScreen'
 import Icon from '../iconfont/Icon'
 import { RootStackParamList } from './StackParamList'
 import MineScreen from '../screens/MineScreen'
@@ -55,7 +55,7 @@ const BottomTab = createBottomTabNavigator()
 const BottomTabNavigator = () => (
   <BottomTab.Navigator
     tabBarOptions={{
-      activeTintColor: 'tomato',
+      activeTintColor: '#2196f3',
       inactiveTintColor: 'gray',
     }}
     initialRouteName="HomeStackScreen"

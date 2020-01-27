@@ -12,7 +12,7 @@ class Api {
   instance: AxiosInstance
   constructor(baseConfig?: AxiosRequestConfig) {
     this.instance = axios.create({
-      baseURL: 'https://cnodejs.org/api/v1',
+      baseURL: 'https://api.github.com',
       timeout: 10000,
       ...baseConfig,
     })

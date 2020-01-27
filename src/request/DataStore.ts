@@ -2,7 +2,7 @@ import store from 'react-native-simple-store'
 import dayjs from 'dayjs'
 import GitHub from './GitHub'
 
-type Api = 'getTopics'
+type Api = 'getRepositories'
 
 class DataStore {
   static checkTimeStampValid = timestamp => {

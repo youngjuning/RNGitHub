@@ -44,6 +44,7 @@
     "react-native-reanimated": "^1.4.0",
     "react-native-safe-area-context": "^0.6.2",
     "react-native-screens": "^1.0.0-alpha.23",
+    "react-native-simple-shadow-view": "^1.6.3",
     "react-native-simple-store": "^2.0.2",
     "react-native-splash-screen": "^3.2.0",
     "react-native-spring-scrollview": "^2.0.23",

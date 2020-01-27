@@ -15,7 +15,7 @@ export default () => {
           console.log('[onStateChange]', currentRouteName)
           if (currentRouteName === 'PopularScreen') {
             global.android && StatusBar.setBackgroundColor('#2196f3')
-            StatusBar.setBarStyle('light-content')
+            StatusBar.setBarStyle('dark-content')
           } else {
             global.android && StatusBar.setBackgroundColor('#ffffff')
             StatusBar.setBarStyle('dark-content')
