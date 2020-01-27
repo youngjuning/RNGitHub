@@ -3,27 +3,23 @@ import { View, Text, StyleSheet } from 'react-native'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../routes/StackParamList'
-import DataStore from '../request/DataStore'
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'HomeScreen'>
-type HomeScreenRouteProp = RouteProp<RootStackParamList, 'HomeScreen'>
+type MineScreenNavigationProp = StackNavigationProp<RootStackParamList, 'MineScreen'>
+type MineScreenRouteProp = RouteProp<RootStackParamList, 'MineScreen'>
 type Props = {
-  navigation: HomeScreenNavigationProp
-  route: HomeScreenRouteProp
+  navigation: MineScreenNavigationProp
+  route: MineScreenRouteProp
 }
 
-export default class HomeScreen extends React.Component<Props> {
+export default class MineScreen extends React.Component<Props> {
   constructor(props: Props) {
     super(props)
-    DataStore('getTopics', { page: 1, tab: 'ask' }).then(res => {
-      console.log('[HomeScreen]', res)
-    })
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ fontSize: 30 }}> HomeScreen </Text>
+        <Text style={{ fontSize: 30 }}> MineScreen </Text>
       </View>
     )
   }

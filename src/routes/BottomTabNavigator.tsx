@@ -1,23 +1,16 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import HomeScreen from '../screens/HomeScreen'
 import getScreenOptions from './utils/getScreenOptions'
 import TrendingScreen from '../screens/TrendingScreen'
 import FavoriteScreen from '../screens/FavoriteScreen'
 import PopularScreen from '../screens/PopularScreen'
 import Icon from '../iconfont/Icon'
 import { RootStackParamList } from './StackParamList'
+import MineScreen from '../screens/MineScreen'
 
 const Stack = createStackNavigator<RootStackParamList>()
-const HomeStackScreen = () => (
-  <Stack.Navigator
-    // @ts-ignore
-    screenOptions={{ ...getScreenOptions() }}
-  >
-    <Stack.Screen name="HomeScreen" component={HomeScreen} />
-  </Stack.Navigator>
-)
+
 const TrendingStackScreen = () => (
   <Stack.Navigator
     // @ts-ignore
@@ -48,6 +41,14 @@ const PopularStackScreen = () => (
     />
   </Stack.Navigator>
 )
+const MineStackScreen = () => (
+  <Stack.Navigator
+    // @ts-ignore
+    screenOptions={{ ...getScreenOptions() }}
+  >
+    <Stack.Screen name="MineScreen" component={MineScreen} />
+  </Stack.Navigator>
+)
 
 const BottomTab = createBottomTabNavigator()
 
@@ -60,8 +61,8 @@ const BottomTabNavigator = () => (
     initialRouteName="HomeStackScreen"
   >
     <BottomTab.Screen
-      name="HomeStackScreen"
-      component={HomeStackScreen}
+      name="PopularStackScreen"
+      component={PopularStackScreen}
       options={{
         tabBarLabel: '最热',
         tabBarIcon: ({ focused, color, size }) => <Icon name={focused ? 'remen' : 'remen'} size={size} color={color} />,
@@ -88,8 +89,8 @@ const BottomTabNavigator = () => (
       }}
     />
     <BottomTab.Screen
-      name="PopularStackScreen"
-      component={PopularStackScreen}
+      name="MineStackScreen"
+      component={MineStackScreen}
       options={{
         tabBarLabel: '我的',
         tabBarIcon: ({ focused, color, size }) => <Icon name={focused ? 'wode1' : 'wode'} size={size} color={color} />,
