@@ -120,6 +120,6 @@ export default class PopularScreen extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Global.ios ? Global.statusBarHeight : 0,
+    paddingTop: global.ios ? global.statusBarHeight : 0,
   },
 })

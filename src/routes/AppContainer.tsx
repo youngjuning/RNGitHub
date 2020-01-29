@@ -13,7 +13,7 @@ export default () => {
         const currentRouteName = getActiveRouteName(state)
         if (previousRouteName !== currentRouteName) {
           console.log('[onStateChange]', currentRouteName)
-          Global.android && StatusBar.setBackgroundColor('#ffffff')
+          global.android && StatusBar.setBackgroundColor('#ffffff')
           StatusBar.setBarStyle('dark-content')
         }
       }}

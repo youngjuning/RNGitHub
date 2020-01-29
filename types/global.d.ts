@@ -1,4 +1,4 @@
-declare const Global: {
+declare const global: {
   HermesInternal: null | {}
   windowWidth: number
   windowHeight: number
