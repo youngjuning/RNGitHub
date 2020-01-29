@@ -13,13 +13,8 @@ export default () => {
         const currentRouteName = getActiveRouteName(state)
         if (previousRouteName !== currentRouteName) {
           console.log('[onStateChange]', currentRouteName)
-          if (currentRouteName === 'PopularScreen') {
-            global.android && StatusBar.setBackgroundColor('#2196f3')
-            StatusBar.setBarStyle('dark-content')
-          } else {
-            global.android && StatusBar.setBackgroundColor('#ffffff')
-            StatusBar.setBarStyle('dark-content')
-          }
+          global.android && StatusBar.setBackgroundColor('#ffffff')
+          StatusBar.setBarStyle('dark-content')
         }
       }}
     >

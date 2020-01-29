@@ -2,13 +2,12 @@ import React from 'react'
 import { View, StyleSheet, StatusBar } from 'react-native'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import ScrollableTabView from 'react-native-scrollable-tab-view'
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
 import { observable, action, computed, runInAction } from 'mobx'
 import { observer } from 'mobx-react'
 import { LargeList } from 'react-native-largelist-v3'
 import { ChineseWithLastDateHeader, ChineseWithLastDateFooter } from 'react-native-spring-scrollview/Customize'
 import { createAsyncIterator } from '@sishuguojixuefu/iterator'
-
 import { RootStackParamList } from '../../routes/StackParamList'
 import GitHub from '../../request/GitHub'
 import PopularItem from './views/PopularItem'
@@ -21,7 +20,7 @@ type Props = {
   route: PopularScreenRouteProp
 }
 
-const tabs = ['javascript', 'react', 'react native']
+const tabs = ['javascript', 'react', 'react native', 'vuejs']
 
 class ListStore {
   listRef?: LargeList | null
@@ -42,7 +41,7 @@ class ListStore {
 
   initData = async () => {
     try {
-      this.Iterator = createAsyncIterator(GitHub.getRepositories, { q: tabs[this.tabIndex] })
+      this.Iterator = createAsyncIterator(GitHub.getRepositories, { q: tabs[this.tabIndex], sort: 'stars' })
       const data = await this.Iterator.next()
       runInAction(() => {
         this.data = data.value
@@ -84,8 +83,13 @@ export default class PopularScreen extends React.Component<Props> {
     const { onChangeTab, listData, onRefresh, loadMore, allLoaded } = this.listStore
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#2196f3" barStyle="dark-content" />
-        <ScrollableTabView onChangeTab={onChangeTab} style={{ width: global.windowWidth * 1 }}>
+        <StatusBar barStyle="dark-content" />
+        <ScrollableTabView
+          onChangeTab={onChangeTab}
+          renderTabBar={() => <ScrollableTabBar />}
+          tabBarActiveTextColor="#2196f3"
+          tabBarUnderlineStyle={{ backgroundColor: '#2196f3', height: 2 }}
+        >
           {tabs.map((item, index) => {
             return (
               <ScrollableTabViewItem tabLabel={item} key={index.toString()}>
@@ -116,6 +120,6 @@ export default class PopularScreen extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: global.statusBarHeight,
+    paddingTop: Global.ios ? Global.statusBarHeight : 0,
   },
 })

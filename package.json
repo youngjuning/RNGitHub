@@ -23,6 +23,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.1",
     "@react-native-community/masked-view": "^0.1.5",
+    "@react-native-community/viewpager": "^3.3.0",
     "@react-navigation/bottom-tabs": "^5.0.0-alpha.34",
     "@react-navigation/native": "^5.0.0-alpha.27",
     "@react-navigation/stack": "^5.0.0-alpha.58",
@@ -64,6 +65,7 @@
     "@sishuguojixuefu/eslint-config": "^0.6.4",
     "@types/jest": "^24.0.18",
     "@types/react-native": "^0.60.22",
+    "@types/react-native-scrollable-tab-view": "^0.10.1",
     "@types/react-test-renderer": "16.9.0",
     "babel-jest": "^24.9.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
