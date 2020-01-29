@@ -82,7 +82,7 @@ export default class PopularScreen extends React.Component<Props> {
     const { onChangeTab, listData, onRefresh, loadMore, allLoaded } = this.listStore
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="dark-content" backgroundColor="#f5f5f9" />
         <ScrollableTabView
           onChangeTab={onChangeTab}
           renderTabBar={() => <ScrollableTabBar />}
