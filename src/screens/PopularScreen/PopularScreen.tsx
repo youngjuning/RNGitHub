@@ -58,7 +58,6 @@ class ListStore {
 
   loadMore = async () => {
     const data = await this.Iterator!.next()
-    console.log('[PopularScreen]', data.done)
     runInAction(() => {
       this.data = this.data.concat(data.value)
       this.allLoaded = data.done
