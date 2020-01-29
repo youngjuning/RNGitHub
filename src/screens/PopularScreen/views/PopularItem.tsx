@@ -25,13 +25,9 @@ export default class PopularItem extends React.Component<Props> {
                 <Icon name="shoucang" />
                 <Text>{item.stargazers_count}</Text>
               </View>
-              <TouchableOpacity
-                onPress={() => {
-                  Alert.alert('hahah')
-                }}
-              >
+              {/* <TouchableOpacity onPress={() => {}}>
                 <Icon name="aixin" color="red" />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
         </TouchableOpacity>

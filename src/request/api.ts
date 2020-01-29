@@ -30,6 +30,7 @@ class Api {
         return response.data
       },
       error => {
+        !__DEV__ && console.log('[api]', error.message)
         // 对响应错误做点什么
         return Promise.reject(error)
       },

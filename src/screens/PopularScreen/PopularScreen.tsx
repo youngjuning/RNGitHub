@@ -2,14 +2,17 @@ import React from 'react'
 import { View, StyleSheet, StatusBar } from 'react-native'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view'
-import { observable, action, computed, runInAction, toJS } from 'mobx'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
+import { observable, action, computed, runInAction } from 'mobx'
 import { observer } from 'mobx-react'
 import { LargeList } from 'react-native-largelist-v3'
 import { ChineseWithLastDateHeader, ChineseWithLastDateFooter } from 'react-native-spring-scrollview/Customize'
+import { createAsyncIterator } from '@sishuguojixuefu/iterator'
+
 import { RootStackParamList } from '../../routes/StackParamList'
 import GitHub from '../../request/GitHub'
 import PopularItem from './views/PopularItem'
+import ScrollableTabViewItem from '../../views/ScrollableTabViewItem'
 
 type PopularScreenNavigationProp = StackNavigationProp<RootStackParamList, 'PopularScreen'>
 type PopularScreenRouteProp = RouteProp<RootStackParamList, 'PopularScreen'>
@@ -18,44 +21,50 @@ type Props = {
   route: PopularScreenRouteProp
 }
 
-const routes = [
-  { key: 'java', title: 'java' },
-  { key: 'javascript', title: 'javascript' },
-]
+const tabs = ['javascript', 'react', 'react native']
 
 class ListStore {
   listRef?: LargeList | null
+  Iterator?: { next(): Promise<{ done: boolean; value: any[]; total: number }> }
+  allLoaded = false
 
   @observable tabIndex = 0
-  @observable data: { items: any[]; total_count?: number; incomplete_results?: boolean } = { items: [] }
+  @observable data: any[] = []
   @computed get listData() {
-    return [{ items: this.data.items }]
+    return [{ items: this.data }]
   }
 
-  @action onIndexChange = tabIndex => {
-    this.tabIndex = tabIndex
-    this.data = { items: [] }
-    this.loadData()
+  @action onChangeTab = ({ i }) => {
+    this.tabIndex = i
+    this.data = []
+    this.initData()
   }
 
-  loadData = async () => {
+  initData = async () => {
     try {
-      const data = await GitHub.getRepositories({ q: routes[this.tabIndex].key })
+      this.Iterator = createAsyncIterator(GitHub.getRepositories, { q: tabs[this.tabIndex] })
+      const data = await this.Iterator.next()
       runInAction(() => {
-        this.data = data
-        console.log('[PopularScreen]', toJS(this.data.items[0]))
+        this.data = data.value
       })
     } catch (error) {
       console.log('[PopularScreen]', error)
     }
   }
 
-  onRefresh = () => {
+  onRefresh = async () => {
+    await this.initData()
     this.listRef?.endRefresh()
   }
 
-  loadMore = () => {
-    this.listRef?.endLoading()
+  loadMore = async () => {
+    const data = await this.Iterator!.next()
+    console.log('[PopularScreen]', data.done)
+    runInAction(() => {
+      this.data = this.data.concat(data.value)
+      this.allLoaded = data.done
+      this.listRef?.endLoading()
+    })
   }
 }
 
@@ -68,44 +77,37 @@ export default class PopularScreen extends React.Component<Props> {
   }
 
   async componentDidMount() {
-    this.listStore.loadData()
-  }
-
-  renderListView = () => {
-    const { listData, onRefresh, loadMore } = this.listStore
-    return (
-      <LargeList
-        ref={ref => (this.listStore.listRef = ref)}
-        data={listData}
-        renderIndexPath={({ section, row }) => <PopularItem item={listData[section].items[row]} onSelect={() => {}} />}
-        heightForIndexPath={() => 97}
-        // 下拉刷新
-        refreshHeader={ChineseWithLastDateHeader}
-        onRefresh={onRefresh}
-        // 上拉加载更多
-        loadingFooter={ChineseWithLastDateFooter}
-        onLoading={loadMore}
-      />
-    )
+    this.listStore.initData()
   }
 
   render() {
-    const { tabIndex, onIndexChange } = this.listStore
+    const { onChangeTab, listData, onRefresh, loadMore, allLoaded } = this.listStore
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="#2196f3" barStyle="dark-content" />
-        <TabView
-          navigationState={{ index: tabIndex, routes }}
-          renderTabBar={props => (
-            <TabBar {...props} indicatorStyle={{ backgroundColor: 'white' }} style={{ backgroundColor: '#2196f3' }} />
-          )}
-          renderScene={SceneMap({
-            java: () => this.renderListView(),
-            javascript: () => this.renderListView(),
+        <ScrollableTabView onChangeTab={onChangeTab} style={{ width: global.windowWidth * 1 }}>
+          {tabs.map((item, index) => {
+            return (
+              <ScrollableTabViewItem tabLabel={item} key={index.toString()}>
+                <LargeList
+                  ref={ref => (this.listStore.listRef = ref)}
+                  data={listData}
+                  renderIndexPath={({ section, row }) => (
+                    <PopularItem item={listData[section].items[row]} onSelect={() => {}} />
+                  )}
+                  heightForIndexPath={() => 97}
+                  // 下拉刷新
+                  refreshHeader={ChineseWithLastDateHeader}
+                  onRefresh={onRefresh}
+                  // 上拉加载更多
+                  loadingFooter={ChineseWithLastDateFooter}
+                  onLoading={loadMore}
+                  allLoaded={allLoaded}
+                />
+              </ScrollableTabViewItem>
+            )
           })}
-          onIndexChange={onIndexChange}
-          initialLayout={{ width: global.windowWidth }}
-        />
+        </ScrollableTabView>
       </View>
     )
   }

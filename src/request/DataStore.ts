@@ -28,10 +28,10 @@ class DataStore {
       if (resData && DataStore.checkTimeStampValid(resData.timestamp)) {
         return resData.data
       }
-      resData = await this.fetchNetData(api, { params })
+      resData = await this.fetchNetData(api, params)
       return resData
     } catch (error) {
-      const resData = await this.fetchNetData(api, { params })
+      const resData = await this.fetchNetData(api, params)
       return resData
     }
   }
