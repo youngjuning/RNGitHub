@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { StackNavigationProp, Header } from '@react-navigation/stack'
 import { RootStackParamList } from '../routes/StackParamList'
 
 type FavoriteScreenNavigationProp = StackNavigationProp<RootStackParamList, 'FavoriteScreen'>
