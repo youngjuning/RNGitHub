@@ -65,3 +65,4 @@ buck-out/
 
 # Custom
 *.lock
+.png-cache
