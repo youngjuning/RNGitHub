@@ -56,7 +56,7 @@ class ListStore {
     this.listRef?.endRefresh()
   }
 
-  loadMore = async () => {
+  onLoading = async () => {
     const data = await this.Iterator!.next()
     runInAction(() => {
       this.data = this.data.concat(data.value)
@@ -79,7 +79,7 @@ export default class PopularScreen extends React.Component<Props> {
   }
 
   render() {
-    const { onChangeTab, listData, onRefresh, loadMore, allLoaded } = this.listStore
+    const { onChangeTab, listData, onRefresh, onLoading, allLoaded } = this.listStore
 
     return (
       <View style={styles.container}>
@@ -105,7 +105,7 @@ export default class PopularScreen extends React.Component<Props> {
                   onRefresh={onRefresh}
                   // 上拉加载更多
                   loadingFooter={ChineseWithLastDateFooter}
-                  onLoading={loadMore}
+                  onLoading={onLoading}
                   allLoaded={allLoaded}
                 />
               </ScrollableTabViewItem>
